@@ -1,3 +1,6 @@
+import { createClient } from "@supabase/supabase-js";
+import "./styles.css";
+
 const USER_KEY = "coloc-ecole-user-id";
 const LOG_PREFIX = "[Coloc Supabase]";
 
@@ -17,9 +20,9 @@ const logoutButton = document.querySelector("#logout-button");
 const createLock = document.querySelector("#create-lock");
 const cancelEditButton = document.querySelector("#cancel-edit-button");
 
-const supabaseUrl = window.SUPABASE_URL;
-const supabaseAnonKey = window.SUPABASE_ANON_KEY;
-const client = window.supabase.createClient(supabaseUrl, supabaseAnonKey);
+const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
+const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
+const client = createClient(supabaseUrl, supabaseAnonKey);
 
 let activeFilter = "Tous";
 let groups = [];
@@ -42,11 +45,11 @@ function logError(step, error, payload = {}) {
 }
 
 function assertSupabaseConfig() {
-  const hasUrl = supabaseUrl && !supabaseUrl.includes("TON-PROJET");
-  const hasKey = supabaseAnonKey && !supabaseAnonKey.includes("TA-CLE");
+  const hasUrl = Boolean(supabaseUrl);
+  const hasKey = Boolean(supabaseAnonKey);
 
   if (!hasUrl || !hasKey) {
-    throw new Error("Configuration Supabase manquante dans supabase-config.js.");
+    throw new Error("Variables Vite manquantes : VITE_SUPABASE_URL et VITE_SUPABASE_ANON_KEY.");
   }
 }
 

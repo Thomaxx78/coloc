@@ -1,2 +1,4 @@
-/supabase-schema.sql
-/supabase-config.js
+.env
+.env.local
+node_modules
+dist
