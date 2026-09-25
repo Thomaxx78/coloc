@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Coloc École</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <main class="shell">
+      <section class="account-panel" aria-label="Compte étudiant">
+        <div id="guest-view" class="account-card">
+          <div>
+            <h2>Inscription étudiant</h2>
+            <p>Les groupes sont visibles par tous. Connectez-vous pour publier une coloc.</p>
+          </div>
+          <form id="signup-form" class="signup-form">
+            <label>
+              Prénom
+              <input name="firstName" type="text" placeholder="Thomas" required>
+            </label>
+            <label>
+              Groupe école
+              <select name="schoolGroup" required>
+                <option value="L">Groupe L</option>
+                <option value="M">Groupe M</option>
+                <option value="N">Groupe N</option>
+                <option value="Autre">Autre</option>
+              </select>
+            </label>
+            <label>
+              Genre
+              <select name="gender" required>
+                <option value="Homme">Homme</option>
+                <option value="Femme">Femme</option>
+              </select>
+            </label>
+            <label>
+              Photo de profil
+              <input name="avatar" type="file" accept="image/*">
+            </label>
+            <button type="submit">S'inscrire</button>
+          </form>
+        </div>
+
+        <div id="user-view" class="account-card hidden">
+          <div class="user-summary">
+            <div id="user-avatar" class="avatar" aria-hidden="true"></div>
+            <div>
+              <h2 id="user-name"></h2>
+              <p id="user-meta"></p>
+            </div>
+          </div>
+          <button id="logout-button" class="secondary-button" type="button">Se déconnecter</button>
+        </div>
+      </section>
+
+      <section class="workspace" aria-label="Gestion des groupes de colocation">
+        <aside class="panel">
+          <h2>Créer un groupe</h2>
+          <p id="create-lock" class="lock-message">Inscrivez-vous pour créer une coloc.</p>
+          <form id="group-form" class="form">
+            <label>
+              Groupe école
+              <select name="schoolGroup" required>
+                <option value="L">Groupe L</option>
+                <option value="M">Groupe M</option>
+                <option value="N">Groupe N</option>
+                <option value="Autre">Autre</option>
+              </select>
+            </label>
+            <label>
+              Type de coloc
+              <select name="genderRule" required>
+                <option value="Mixte">Mixte</option>
+                <option value="Hommes seulement">Hommes seulement</option>
+                <option value="Femmes seulement">Femmes seulement</option>
+              </select>
+            </label>
+            <label>
+              Places
+              <input name="capacity" type="number" min="2" max="12" value="4" required>
+            </label>
+            <label>
+              Places disponibles
+              <input name="availableSpots" type="number" min="0" max="12" value="3" required>
+            </label>
+            <label>
+              Personnes déjà dans la coloc
+              <textarea name="existingMembers" rows="3" placeholder="Emma - L&#10;Nassim - M"></textarea>
+            </label>
+            <label>
+              Ville
+              <input name="city" type="text" placeholder="Paris, Lille, Lyon..." required>
+            </label>
+            <label class="important-field">
+              Contact
+              <input name="contact" type="text" placeholder="WhatsApp, Insta, téléphone..." required>
+              <span>Indispensable pour que les autres puissent vous écrire rapidement.</span>
+            </label>
+            <label>
+              Détails
+              <textarea name="notes" rows="4" placeholder="Proche école, horaires, ambiance, voitures..."></textarea>
+            </label>
+            <div class="form-actions">
+              <button type="submit">Créer le groupe</button>
+              <button id="cancel-edit-button" class="secondary-button hidden" type="button">Annuler</button>
+            </div>
+          </form>
+        </aside>
+
+        <section class="panel">
+          <div class="toolbar">
+            <div class="filters" role="group" aria-label="Filtrer par groupe école">
+              <button class="filter active" type="button" data-filter="Tous">Tous</button>
+              <button class="filter" type="button" data-filter="L">L</button>
+              <button class="filter" type="button" data-filter="M">M</button>
+              <button class="filter" type="button" data-filter="N">N</button>
+              <button class="filter" type="button" data-filter="Autre">Autre</button>
+            </div>
+          </div>
+          <div id="groups" class="groups" aria-live="polite"></div>
+        </section>
+      </section>
+    </main>
+
+    <template id="group-card-template">
+      <article class="group-card">
+        <div class="card-head">
+          <div>
+            <span class="badge"></span>
+            <h3></h3>
+          </div>
+          <div class="card-actions">
+            <button class="contact-button" type="button">Contacter</button>
+            <button class="edit-button hidden" type="button">Modifier</button>
+          </div>
+        </div>
+        <dl class="details">
+          <div>
+            <dt>Ville</dt>
+            <dd class="city"></dd>
+          </div>
+          <div>
+            <dt>Places</dt>
+            <dd class="spots"></dd>
+          </div>
+          <div>
+            <dt>Règle</dt>
+            <dd class="gender-rule"></dd>
+          </div>
+        </dl>
+        <div class="member-list" aria-label="Personnes dans le groupe"></div>
+        <p class="notes"></p>
+        <p class="contact"></p>
+      </article>
+    </template>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="supabase-config.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
