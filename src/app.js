@@ -380,6 +380,7 @@ async function contactGroup(group) {
 }
 
 function editGroup(group) {
+  document.querySelector("#create-details").open = true;
   editingGroupId = group.id;
   form.schoolGroup.value = group.schoolGroup;
   form.genderRule.value = group.genderRule;

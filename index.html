@@ -6,9 +6,10 @@
     <title>Coloc École</title>
   </head>
   <body>
+    <header class="site-header"><a class="header-link" href="#account">Mon profil <span aria-hidden="true">↗</span></a></header>
     <main class="shell">
-      <section class="account-panel" aria-label="Compte étudiant">
-        <div id="guest-view" class="account-card">
+      <section id="account" class="account-panel" aria-label="Compte étudiant">
+        <div id="guest-view" class="account-card"><details class="account-details"><summary>Votre profil étudiant <span>Créer mon profil +</span></summary><div class="account-content">
           <div>
             <h2>Inscription étudiant</h2>
             <p>Les groupes sont visibles par tous. Connectez-vous pour publier une coloc.</p>
@@ -40,7 +41,7 @@
             </label>
             <button type="submit">S'inscrire</button>
           </form>
-        </div>
+        </div></details></div>
 
         <div id="user-view" class="account-card hidden">
           <div class="user-summary">
@@ -55,7 +56,7 @@
       </section>
 
       <section class="workspace" aria-label="Gestion des groupes de colocation">
-        <aside class="panel">
+        <aside class="panel create-panel"><details id="create-details"><summary>Publier une coloc <span aria-hidden="true">+</span></summary><div class="create-content">
           <h2>Créer un groupe</h2>
           <p id="create-lock" class="lock-message">Inscrivez-vous pour créer une coloc.</p>
           <form id="group-form" class="form">
@@ -95,7 +96,7 @@
             <label class="important-field">
               Contact
               <input name="contact" type="text" placeholder="WhatsApp, Insta, téléphone..." required>
-              <span>Indispensable pour que les autres puissent vous écrire rapidement.</span>
+
             </label>
             <label>
               Détails
@@ -106,11 +107,11 @@
               <button id="cancel-edit-button" class="secondary-button hidden" type="button">Annuler</button>
             </div>
           </form>
-        </aside>
+        </div></details></aside>
 
-        <section class="panel">
+        <section id="listings" class="panel listings-panel"><div class="listings-heading"><h1 id="page-title">Les colocations</h1></div>
           <div class="toolbar">
-            <div class="filters" role="group" aria-label="Filtrer par groupe école">
+            <p class="filter-label">Votre groupe école</p><div class="filters" role="group" aria-label="Filtrer par groupe école">
               <button class="filter active" type="button" data-filter="Tous">Tous</button>
               <button class="filter" type="button" data-filter="L">L</button>
               <button class="filter" type="button" data-filter="M">M</button>
